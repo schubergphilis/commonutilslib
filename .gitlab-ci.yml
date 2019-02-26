@@ -1,0 +1,33 @@
+stages:
+  - lint
+  - test
+  - build
+  - upload
+
+lint:
+  tags: [elastic]
+  stage: lint
+  image: RUNNER_WITH_PYTHON_3.7_PIPENV
+  script: _CI/scripts/lint.py
+
+test:
+  tags: [elastic]
+  stage: test
+  image: RUNNER_WITH_PYTHON_3.7_PIPENV
+  script: _CI/scripts/test.py
+
+build:
+  tags: [elastic]
+  stage: build
+  image: RUNNER_WITH_PYTHON_3.7_PIPENV
+  script: _CI/scripts/build.py
+
+upload:
+  tags: [elastic]
+  stage: upload
+  image: RUNNER_WITH_PYTHON_3.7_PIPENV
+  only:
+    - tags
+  except:
+    - branches
+  script: _CI/scripts/upload.py
