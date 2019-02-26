@@ -5,7 +5,7 @@ commonutilslib
 A library with some common utility methods for python like tempdir and Pushd
 
 
-* Documentation: https://commonutilslib.readthedocs.org/en/latest
+* Documentation: https://common-utils.readthedocs.io/en/latest/usage.html
 
 
 Development Workflow
