@@ -13,3 +13,9 @@ History
 ------------------
 
 * First official release
+
+
+0.1.1 (18-10-2019)
+------------------
+
+* Update template and bumped dependencies.
