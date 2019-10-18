@@ -24,7 +24,7 @@
 #
 
 """
-Custom exception code for commonutilslib
+Custom exception code for commonutilslib.
 
 .. _Google Python Style Guide:
    http://google.github.io/styleguide/pyguide.html

@@ -24,7 +24,7 @@
 #
 
 """
-Main code for commonutilslib
+Main code for commonutilslib.
 
 .. _Google Python Style Guide:
    http://google.github.io/styleguide/pyguide.html
@@ -59,7 +59,7 @@ LOGGER.addHandler(logging.NullHandler())
 
 @contextmanager
 def cd(new_directory, clean_up=lambda: True):  # pylint: disable=invalid-name
-    """Changes into a given directory and cleans up after it is done
+    """Changes into a given directory and cleans up after it is done.
 
     Args:
         new_directory: The directory to change to
@@ -77,7 +77,7 @@ def cd(new_directory, clean_up=lambda: True):  # pylint: disable=invalid-name
 
 @contextmanager
 def tempdir():
-    """Creates a temporary directory"""
+    """Creates a temporary directory."""
     directory_path = tempfile.mkdtemp()
 
     def clean_up():
@@ -123,7 +123,7 @@ def on_error(func, path, exc_info):  # pylint: disable=unused-argument
 
 
 class Pushd:
-    """Implements bash pushd capabilities"""
+    """Implements bash pushd capabilities."""
 
     cwd = None
     original_dir = None
@@ -141,7 +141,7 @@ class Pushd:
 
 
 class RecursiveDictionary(dict):
-    """Implements recursively updating dictionary
+    """Implements recursively updating dictionary.
 
     RecursiveDictionary provides the methods rec_update and iter_rec_update
     that can be used to update member dictionaries rather than overwriting
@@ -149,7 +149,7 @@ class RecursiveDictionary(dict):
     """
 
     def rec_update(self, other, **third):
-        """Implements the recursion
+        """Implements the recursion.
 
         Recursively update the dictionary with the contents of other and
         third like dict.update() does - but don't overwrite sub-dictionaries.
@@ -162,7 +162,7 @@ class RecursiveDictionary(dict):
         self.iter_rec_update(third.items())
 
     def iter_rec_update(self, iterator):
-        """Updates recursively"""
+        """Updates recursively."""
         for (key, value) in iterator:
             if key in self and \
                     isinstance(self[key], dict) and isinstance(value, dict):
@@ -182,7 +182,7 @@ class Hasher:
         self.buffer_size = buffer_size
 
     def hash_file(self, file_name):
-        """Calculates the sha1 hash  of the provided file
+        """Calculates the sha1 hash  of the provided file.
 
         Args:
             file_name (str): The filename of the file to calculate the hash for
@@ -196,7 +196,7 @@ class Hasher:
         return digest.hexdigest()
 
     def hash_directory(self, path):
-        """Calculates the sha1 hash  of the directory in the provided path
+        """Calculates the sha1 hash  of the directory in the provided path.
 
         Args:
             path (str): The path to calculate the digest for
@@ -221,7 +221,7 @@ class Hasher:
         return digest.hexdigest()
 
     def _get_digest_of_file(self, digest, file_name, buffer_size):
-        """Calculated the sha1 digest of a file using the provided buffer size
+        """Calculated the sha1 digest of a file using the provided buffer size.
 
         Args:
             digest (str): The digest to update

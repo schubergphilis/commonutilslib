@@ -29,46 +29,23 @@ import shutil
 import stat
 import logging
 
+# this sets up everything and MUST be included before any third party module in every step
+import _initialize_template
+
+from configuration import ENVIRONMENT_VARIABLES
+from library import clean_up, get_project_root_path
+
 # This is the main prefix used for logging
 LOGGER_BASENAME = '''_CI.reset'''
 LOGGER = logging.getLogger(LOGGER_BASENAME)
 LOGGER.addHandler(logging.NullHandler())
 
 
-current_file_path = os.path.dirname(os.path.abspath(__file__))
-ci_path = os.path.abspath(os.path.join(current_file_path, '..'))
-PROJECT_ROOT = os.path.dirname(ci_path)
-if ci_path not in sys.path:
-    sys.path.append(ci_path)
-
-from configuration import ENVIRONMENT_VARIABLES
-
-
-def on_error(func, path, exc_info):  # pylint: disable=unused-argument
-    """
-    Error handler for ``shutil.rmtree``.
-
-    # Copyright Michael Foord 2004
-    # Released subject to the BSD License
-    # Please see http://www.voidspace.org.uk/python/license.shtml
-    """
-    if not os.access(path, os.W_OK):
-        # Is the error an access error ?
-        os.chmod(path, stat.S_IWUSR)
-        func(path)
-    else:
-        raise  # pylint: disable=misplaced-bare-raise
-
-def reset(project_root, environment_variables):
+def reset(environment_variables):
     pipfile_path = environment_variables.get('PIPENV_PIPFILE', 'Pipfile')
-    venv = os.path.join(project_root, os.path.dirname(pipfile_path), '.venv')
-    try:
-        shutil.rmtree(venv, onerror=on_error)
-        print(f'Successfully removed venv {venv}')
-    except Exception as e:
-        print(e)
-        print(f'Unable to remove venv, make sure {venv} exists.')
+    venv = os.path.join(get_project_root_path(), os.path.dirname(pipfile_path), '.venv')
+    clean_up(venv)
 
 
 if __name__ == '__main__':
-    reset(PROJECT_ROOT, ENVIRONMENT_VARIABLES)
+    reset(ENVIRONMENT_VARIABLES)

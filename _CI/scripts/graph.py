@@ -25,7 +25,12 @@
 
 import os
 import logging
+
+# this sets up everything and MUST be included before any third party module in every step
+import _initialize_template
+
 from bootstrap import bootstrap
+from emoji import emojize
 from library import execute_command
 from configuration import PROJECT_SLUG
 
@@ -36,7 +41,7 @@ LOGGER.addHandler(logging.NullHandler())
 
 
 def graph():
-    emojize = bootstrap()
+    bootstrap()
     os.chdir('graphs')
     create_graph_command = ('pyreverse '
                             '-o png '

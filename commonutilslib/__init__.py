@@ -24,7 +24,7 @@
 #
 
 """
-commonutilslib package
+commonutilslib package.
 
 Import all parts from commonutilslib here
 

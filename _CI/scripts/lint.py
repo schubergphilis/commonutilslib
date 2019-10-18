@@ -24,7 +24,12 @@
 #
 
 import logging
+
+# this sets up everything and MUST be included before any third party module in every step
+import _initialize_template
+
 from bootstrap import bootstrap
+from emoji import emojize
 from library import execute_command
 
 
@@ -35,7 +40,7 @@ LOGGER.addHandler(logging.NullHandler())
 
 
 def lint():
-    emojize = bootstrap()
+    bootstrap()
     success = execute_command('prospector -DFM')
     if success:
         LOGGER.info('%s No linting errors found! %s',

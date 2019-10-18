@@ -27,7 +27,10 @@ import logging
 import os
 from time import sleep
 
-# this needs to be imported first as it manipulates the path
+# this sets up everything and MUST be included before any third party module in every step
+import _initialize_template
+
+from emoji import emojize
 from bootstrap import bootstrap
 from library import (open_file,
                      clean_up,
@@ -41,7 +44,7 @@ LOGGER.addHandler(logging.NullHandler())
 
 
 def test():
-    emojize = bootstrap()
+    bootstrap()
     clean_up('test-output')
     os.mkdir('test-output')
     save_requirements()

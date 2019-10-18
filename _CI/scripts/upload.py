@@ -25,6 +25,11 @@
 
 import logging
 import os
+
+# this sets up everything and MUST be included before any third party module in every step
+import _initialize_template
+
+from emoji import emojize
 from build import build
 from library import execute_command, validate_environment_variable_prerequisites
 from configuration import PREREQUISITES
@@ -36,8 +41,8 @@ LOGGER.addHandler(logging.NullHandler())
 
 
 def upload():
-    emojize = build()
-    if not emojize:
+    success = build()
+    if not success:
         LOGGER.error('Errors caught on building the artifact, bailing out...')
         raise SystemExit(1)
     if not validate_environment_variable_prerequisites(PREREQUISITES.get('upload_environment_variables', [])):
